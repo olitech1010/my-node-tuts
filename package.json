@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --env-file=.env index.js",
-    "dev":  "node --watch --trace-warning --env-file=.env index.js"
+    "dev":  "node --watch --trace-warnings --env-file=.env index.js"
   },
-  "Type": "module",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/olitech1010/my-node-tuts.git"
