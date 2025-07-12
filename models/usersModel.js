@@ -1,7 +1,6 @@
-import { boolean } from "joi";
 import mongoose from "mongoose";
 
-const usersSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, 'email is required'],
@@ -48,6 +47,6 @@ const usersSchema = mongoose.Schema({
 
 }, { timestamps: true })
 
-const User = mongoose.model('User', usersSchema)
+const User = mongoose.model('User', userSchema)
 
 export default User
