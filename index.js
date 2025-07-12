@@ -3,7 +3,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import connectDatabase from './config/connect.js'
-import connectSerer from './config/server.js'
+import authRouter from './routers/authRouter.js'
  
 const app = express()
 
@@ -13,8 +13,18 @@ app.use(helmet())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
-connectDatabase;
-connectSerer;
+connectDatabase();
+
+const PORT = process.env.PORT || 300
+
+app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
+})
+    
+
+
+app.use('/api/auth', authRouter)
+
 
 
 app.get('/', (req, res)=> {
