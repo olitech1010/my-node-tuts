@@ -1,4 +1,4 @@
-import signupSchema from '../middlewares/validator.js';
+import { signupSchema, loginSchema } from '../middlewares/validator.js';
 import User from '../models/usersModel.js'
 import bcrypt from 'bcrypt'
 
