@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import connectDatabase from './config/connect.js'
 import authRouter from './routers/authRouter.js'
+import errorHander from './middlewares/errorHander.js'
  
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(helmet())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
+app.use(errorHander)
 
 connectDatabase();
 
@@ -27,6 +29,6 @@ app.use('/api/auth', authRouter)
 
 
 
-app.get('/', (req, res)=> {
-    res.status(200).json({Message: "Hello aapp"})
+app.get('/test-server', (req, res)=> {
+    res.status(200).json({Message: "Hello App is running"})
 })
