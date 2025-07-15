@@ -20,7 +20,7 @@ const loginSchema = Joi.object({
         .max(60)
         .required()
         .email({
-            tlds: {allow: ['come', 'net']}
+            tlds: {allow: ['com', 'net']}
         }),
     password: Joi.string()
     .required()
