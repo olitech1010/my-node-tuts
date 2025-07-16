@@ -25,7 +25,7 @@ const signup = async (req, res) => {
 
         if (user) {
             user.password = undefined;
-            res.status(200).json({
+            res.status(201).json({
                 Meesage: 'User created successfully',
                 user
                 
@@ -83,5 +83,13 @@ const login = async (req, res) => {
     }
 };
 
+//! Logout  
+const logout = (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Logged out successfully, delete token from client side'
+    })
+};
 
-export {signup, login}
+
+export { signup, login, logout }
