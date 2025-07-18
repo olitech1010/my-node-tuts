@@ -14,7 +14,7 @@ const signup = async (req, res) => {
 
         const userExist = await User.findOne({ email })
         if (userExist) {
-            res.status(400).json({success: false, Message: 'User Already register'})
+            res.status(400).json({success: false, Message: 'User Already registered'})
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -90,6 +90,20 @@ const logout = (req, res) => {
         message: 'Logged out successfully, delete token from client side'
     })
 };
+
+// ! Verification code
+ 
+const  sendVerficationCode = async (req, res) => {
+    const user = await User.findOne({email})
+    if (!user) {
+        res.status(404).json({success: false, Message: 'User Does not exist'})
+    }
+    if (user.verified) {
+        res.status(400).json({success: false, Message: 'User is already verified'})
+    }
+
+    const code = Math.floor(Math.random() * 1000000).toString();
+}
 
 
 export { signup, login, logout }
