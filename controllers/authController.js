@@ -1,3 +1,4 @@
+import transport from '../middlewares/sendMail.js';
 import { signupSchema, loginSchema } from '../middlewares/validator.js';
 import User from '../models/usersModel.js'
 import bcrypt from 'bcrypt'
@@ -103,6 +104,27 @@ const  sendVerficationCode = async (req, res) => {
     }
 
     const code = Math.floor(Math.random() * 1000000).toString();
+
+    let info = transport.sendMail({
+        from: process.env.OUTGOING_EMAIL,
+        to: user.email,
+        subject: 'Verification Code',
+        html: '<html>' + code + '</html>'
+    })
+
+    if (info.accepted[0] === user.email) {   
+    const hashedCode = bcrypt.hash(code, 10)
+        user.verificationCode = hashedCode
+        user.verificationCodeValidation = Date.now()
+        user.save()
+        res.status(200).json({
+            message: 'Verification code sent successfully',
+            code: verificationCode
+        })
+    }
+    res.status(400).json({message:'Failed to send Verification Code'})
+
+
 }
 
 
